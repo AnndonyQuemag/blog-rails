@@ -2,4 +2,16 @@
     <h1 style = "color: #5374B1; margin: auto;"><center>Hello World this is mi first blog on Ruby and rails</center></h1>
 </div>
 
+<div>
+  <ul>
+    <% @articles.each do |article| %>
+      <li style = "font-size: 20px ">
+        <%= link_to article.title, article %>               
+      </li>
+    <% end %>
+  </ul>
+
+  </ul><%= link_to "New Article", new_article_path %>
+  
+</div>
 

@@ -1,0 +1,24 @@
+
+<div style = "text-align: center;background-color: #F6F7F8;margin: 1rem; padding: 2rem; border: 2px solid #ccc;">
+  <%= form_with model: @article do |form| %>
+    <div>
+      <%= form.label :title %><br>
+      <%= form.text_field :title %>
+      <% @article.errors.full_messages_for(:title).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div>
+      <%= form.label :body %><br>
+      <%= form.text_area :body %><br>
+      <% @article.errors.full_messages_for(:body).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+
+    <div style = "margin: 1rem; padding: 1rem;">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>
