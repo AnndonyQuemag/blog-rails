@@ -20,5 +20,13 @@
     <div style = "margin: 1rem; padding: 1rem;">
       <%= form.submit %>
     </div>
+    
+    <div>
+      <%= form.label :status %><br>
+      <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    </div>
   <% end %>
 </div>
+
+
+

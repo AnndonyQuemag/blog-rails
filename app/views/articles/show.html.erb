@@ -1,19 +1,32 @@
-<h1 style = "color: green"><%= @article.title %></h1>
+<div style = "text-align: center; background-color: #ECECEC;margin-right: 400px;margin-left: 400px;padding: 1rem">
+  <h1 style = "color: green">Title: <%= @article.title %></h1>
+  
+  <h2 style = "color: green">Body: <%= @article.body %></h2>
 
-<h2 style = "color: green"><%= @article.body %></h2>
+  
+  <h2>Comments</h2>
+  <%= render @article.comments %>
+
+  <h2>Add a comment:</h2>
+  <%= render 'comments/form' %>
+  
+</div>
 
 
 
+<br>
+<br>
+<div style = "background-color: #ECECEC; margin-right: 400px;margin-left: 400px;padding: 1rem">
+  <ul>
+    <li><button type="button"><%= link_to "Back", articles_path %></button> </li>
+  </ul>
 
+    <ul>
+      <li><button type="button"><%= link_to "Edit", edit_article_path(@article) %></button></li><br>
+      <li><button type="button"><%= link_to "Destroy", article_path(@article),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></button></li>
+    </ul>
+</div>
 
-
-<ul>
-  <li><%= link_to "Back", articles_path %></li>
-</ul>
-
-<ul>
-  <li><%= link_to "Edit", edit_article_path(@article) %></li>
-    <li><%= link_to "Destroy", article_path(@article),
-                    method: :delete,
-                    data: { confirm: "Are you sure?" } %></li>
-</ul>
+  
