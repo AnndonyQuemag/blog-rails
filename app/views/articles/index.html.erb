@@ -1,17 +1,24 @@
-<div style = "background-color: #E6E7E8">
+<div style = "background-color: #E6E7E8;margin-right: 400px;margin-left: 400px;padding: 1rem">
     <h1 style = "color: #5374B1; margin: auto;"><center>Hello World this is mi first blog on Ruby and rails</center></h1>
+    <br>
+    Our blog has <%= Article.public_count %> articles and counting!Our blog has <%= Article.public_count %> articles and counting!
 </div>
+<br>
 
-<div>
+
+
+<div style = "background-color: #E6E7E8;margin-right: 400px;margin-left: 400px;padding: 1rem">
   <ul>
     <% @articles.each do |article| %>
-      <li style = "font-size: 20px ">
-        <%= link_to article.title, article %>               
-      </li>
+        <li>
+            <%= link_to article.title, article %>
+        </li>
     <% end %>
   </ul>
 
-  </ul><%= link_to "New Article", new_article_path %>
+  </ul>
+  <button type="button"><%= link_to "New Article", new_article_path %></button>
   
 </div>
+
 
