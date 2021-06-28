@@ -1,15 +1,14 @@
-<p>
-  <strong>Commenter:</strong>
-  <%= comment.commenter %>
-</p>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"><h6>Comenter: <%= comment.commenter %></h6></li>
+  <li class="list-group-item"> comment: <%= comment.body %>
+  <%= link_to [comment.article, comment],
+                method: :delete,
+                data: { confirm: "Are you sure?" } do %>
+    <span class="btn btn-outline-light" style='font-size:20px;margin-left: 90%; margin-top: -40px '>&#10062;</span>
+    <% end %></li>
+  <li class="list-group-item"></li>
+</ul>
+  
 
-<p>
-  <strong>Comment:</strong>
-  <%= comment.body %>
-</p>
 
-<p>
-  <%= link_to 'Destroy Comment', [comment.article, comment],
-              method: :delete,
-              data: { confirm: "Are you sure?" } %>
-</p>
+

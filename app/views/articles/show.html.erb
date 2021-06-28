@@ -1,11 +1,26 @@
-<div style = "text-align: center; background-color: #ECECEC;margin-right: 400px;margin-left: 400px;padding: 1rem">
-  <h1 style = "color: green">Title: <%= @article.title %></h1>
-  <h2 style = "color: green">Body: <%= @article.body %></h2>
+<%= render "nav" %>
+<div class="container">
 
-  <div style = "border: 2px solid #ccc;background-color: #E5E5E5;overflow-y: scroll;max-height: 200px;width: 500px;margin-right: 400px;margin-left: 300px;padding: 1rem">
-    <h2>Comments</h2>
-      <%= render @article.comments %>
+  <div class="card" style="width: 30rem; min-width: 30rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= @article.title %></h5>
+      <p class="card-text"><%= @article.body %></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= render @article.comments %></li>
+    </ul>
+    
   </div>
+
+</div>
+
+
+
+
+<div style = "text-align: center; background-color: #ECECEC;margin-right: 400px;margin-left: 400px;padding: 1rem">
+ 
+
+  
   
   <h2>Add a comment:</h2>
   <%= render 'comments/form' %>
