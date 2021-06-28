@@ -1,40 +1,33 @@
 <%= render "nav" %>
 <div class="container">
-  <div style = "margin-left: 85%;padding: 1rem; max-width: 50rem">
-    
+  <div style = "margin-left: 85%;padding: 1rem; max-width: 50rem;">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Add comment
-    </button>
-
-    <%= render 'comments/form' %>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add comment</button>
   </div>
-  
-  <div class="card" style="max-width: 90rem; min-width: 30rem;">
-    <div class="card-body">
-      <h5 class="card-title"><%= @article.title %></h5>
-      <p class="card-text"><%= @article.body %></p>
+  <div class="card" style="max-width: 90rem; min-width: 30rem;text-align: center">
+    <div class="card-body" >
+      <h3 class="card-title"><%= @article.title %></h3>
+      <h5 class="card-text"><%= @article.body %></h5>
     </div>
-    <ul class="list-group list-group-flush">
+    <ul class="list-group list-group-flush" style="text-align: left">
       <li class="list-group-item"><%= render @article.comments %></li>
     </ul>
   </div>
 </div>
-<br><br><br><br><br><br>
+<div style = "margin-left: 50%;padding: 1rem; max-width: 50rem;">
+  <%= render 'comments/form' %>
+</div>
 
 
-<div style = "background-color: #ECECEC; margin-right: 400px;margin-left: 400px;padding: 1rem">
-  <ul>
-    <li><button type="button"><%= link_to "Back", articles_path %></button> </li>
-  </ul>
+<div style = "margin-right: 400px;margin-left: 400px;padding: 1rem">
+  <button type="button" class="btn btn-warning"><%= link_to "Back", articles_path %></button>
 
-  <ul>
-    <li><button type="button"><%= link_to "Edit", edit_article_path(@article) %></button></li><br>
-    <li><button type="button">
+  <button type="button" class="btn btn-info"><%= link_to "Edit", edit_article_path(@article) %></button>
+    <button type="button" class="btn btn-danger">
       <%= link_to "Destroy", article_path(@article),
                   method: :delete,
-                  data: { confirm: "Are you sure?" } %></button></li>
-  </ul>
+                  data: { confirm: "Are you sure?" } %></button>
+
 </div>
 
   
