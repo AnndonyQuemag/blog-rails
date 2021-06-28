@@ -1,7 +1,16 @@
 <%= render "nav" %>
 <div class="container">
+  <div style = "margin-left: 85%;padding: 1rem; max-width: 50rem">
+    
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Add comment
+    </button>
 
-  <div class="card" style="width: 30rem; min-width: 30rem;">
+    <%= render 'comments/form' %>
+  </div>
+  
+  <div class="card" style="max-width: 90rem; min-width: 30rem;">
     <div class="card-body">
       <h5 class="card-title"><%= @article.title %></h5>
       <p class="card-text"><%= @article.body %></p>
@@ -9,23 +18,10 @@
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><%= render @article.comments %></li>
     </ul>
-    
   </div>
-
 </div>
+<br><br><br><br><br><br>
 
-
-
-
-<div style = "text-align: center; background-color: #ECECEC;margin-right: 400px;margin-left: 400px;padding: 1rem">
- 
-
-  
-  
-  <h2>Add a comment:</h2>
-  <%= render 'comments/form' %>
-</div>
-<br>
 
 <div style = "background-color: #ECECEC; margin-right: 400px;margin-left: 400px;padding: 1rem">
   <ul>

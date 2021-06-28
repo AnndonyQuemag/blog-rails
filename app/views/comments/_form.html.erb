@@ -1,21 +1,36 @@
-<%= form_with model: [ @article, @article.comments.build ] do |form| %>
-  <p>
-    <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
-  </p>
-
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
-
-  <p>
-    <%= form.submit %>
-  </p>
-  
-  <div>
-    <%= form.label :status %><br>
-    <%= form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+<!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New comment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="commenter">commenter</span>
+              <%= form.text_field :commenter, class: "form-control" %>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="body">body</span>
+              <%= form.text_area :body, class: "form-control" %>
+            </div>
+            
+            <div>
+              <%= form.label :status %><br>
+              <%= form.select(:status, [ 'public', 'private', 'archived' ], {}, { :class => 'form-select form-select-lg mb-3' }) %>
+            </div>
+            <p>
+              <%= form.submit class: "btn btn-primary" %>
+            </p>
+          <% end %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+
 

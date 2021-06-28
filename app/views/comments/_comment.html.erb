@@ -1,6 +1,7 @@
 <ul class="list-group list-group-flush">
-  <li class="list-group-item"><h6>Comenter: <%= comment.commenter %></h6></li>
-  <li class="list-group-item"> comment: <%= comment.body %>
+  <li class="list-group-item">
+  <h6>Comenter: <%= comment.commenter %></h6>
+  comment: <%= comment.body %>
   <%= link_to [comment.article, comment],
                 method: :delete,
                 data: { confirm: "Are you sure?" } do %>
@@ -9,6 +10,3 @@
   <li class="list-group-item"></li>
 </ul>
   
-
-
-
