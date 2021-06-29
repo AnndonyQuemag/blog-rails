@@ -1,39 +1,44 @@
 <%= render "nav" %>
+
 <div class="container" style="margin-top: 2rem">
-
-  <%= link_to new_article_path do %>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New article</button>
+  <% if current_user %>
+    <%= link_to new_article_path do %>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New article</button>
+    <% end %>
+  <% else %>
+    <h4>If you want to create articles, edit, or delete you must log in</h4>
   <% end %>
-
   <br><br>
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Title</th>
-        <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col" style="text-align: center">Title</th>
+        <% if current_user %>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        <% end %>
       </tr>
     </thead>
     <tbody> 
       <% @articles.each do |article| %>
         <tr>
-          <td>
+          <td style="text-align: center">
               <%= link_to article.title, article %>
           </td>
-          <td>    
-            <%= link_to edit_article_path(article.id) do %>
-              <span class="btn btn-outline-light" style='font-size:40px;'>&#128221;</span>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to article_path(article.id),
-              method: :delete,
-              data: { confirm: "Are you sure?" } do %>
-              <span class="btn btn-outline-light" style='font-size:40px;'>&#128465;</span>
-            <% end %>
-
-            
-          </td>
+          <% if current_user %>
+            <td> 
+              <%= link_to edit_article_path(article.id) do %>
+                <span class="btn btn-outline-light" style='font-size:40px;'>&#128221;</span>
+              <% end %>           
+            </td>
+            <td>   
+              <%= link_to article_path(article.id),
+                method: :delete,
+                data: { confirm: "Are you sure?" } do %>
+                <span class="btn btn-outline-light" style='font-size:40px;'>&#128465;</span>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>

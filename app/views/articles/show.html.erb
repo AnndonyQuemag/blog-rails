@@ -1,9 +1,15 @@
 <%= render "nav" %>
 <div class="container">
+<% if current_user %>
+  
   <div style = "margin-left: 85%;padding: 1rem; max-width: 50rem;">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add comment</button>
   </div>
+<% else %>
+  <h4>If you want to make comments, edit, or delete you must log in</h4><br>
+<% end %>
+  
   <div class="card" style="max-width: 90rem; min-width: 30rem;text-align: center">
     <div class="card-body" >
       <h3 class="card-title"><%= @article.title %></h3>
@@ -21,13 +27,13 @@
 
 <div style = "margin-right: 400px;margin-left: 400px;padding: 1rem">
   <button type="button" class="btn btn-warning"><%= link_to "Back", articles_path %></button>
-
-  <button type="button" class="btn btn-info"><%= link_to "Edit", edit_article_path(@article) %></button>
-    <button type="button" class="btn btn-danger">
-      <%= link_to "Destroy", article_path(@article),
-                  method: :delete,
-                  data: { confirm: "Are you sure?" } %></button>
-
+  <% if current_user %>
+    <button type="button" class="btn btn-info"><%= link_to "Edit", edit_article_path(@article) %></button>
+      <button type="button" class="btn btn-danger">
+        <%= link_to "Destroy", article_path(@article),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></button>
+  <% end %>
 </div>
 
   
