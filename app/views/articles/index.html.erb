@@ -1,19 +1,54 @@
-<div style = "background-color: #E6E7E8;margin-right: 400px;margin-left: 400px;padding: 1rem">
-  <h1 style = "color: #5374B1; margin: auto;"><center>Hello World this is mi first blog on Ruby and rails</center></h1>
-  <br>
-  Our blog has <%= Article.public_count %> articles and counting!Our blog has <%= Article.public_count %> articles and counting!
-</div>
-<br>
+<%= render "nav" %>
+<div class="container" style="margin-top: 2rem">
 
-<div style = "background-color: #E6E7E8;margin-right: 400px;margin-left: 400px;padding: 1rem">
-  <ul>
-    <% @articles.each do |article| %>
-      <li>
-          <%= link_to article.title, article %>
-      </li>
-    <% end %>
-  </ul>
-  <button type="button"><%= link_to "New Article", new_article_path %></button>
+  <%= link_to new_article_path do %>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">New article</button>
+  <% end %>
+
+  <br><br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody> 
+      <% @articles.each do |article| %>
+        <tr>
+          <td>
+              <%= link_to article.title, article %>
+          </td>
+          <td>    
+            <%= link_to edit_article_path(article.id) do %>
+              <span class="btn btn-outline-light" style='font-size:40px;'>&#128221;</span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to article_path(article.id),
+              method: :delete,
+              data: { confirm: "Are you sure?" } do %>
+              <span class="btn btn-outline-light" style='font-size:40px;'>&#128465;</span>
+            <% end %>
+
+            
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
+
+
+
+
+
+
+  
+  
+
+
+
 
 
