@@ -3,15 +3,12 @@ Rails.application.routes.draw do
   get 'sessions/create'
   get 'sessions/destroy'
   resources :users
-  #root "articles#index"
+  root "articles#index"
 
   resources :articles do
     resources :comments
   end
 
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
-  root "articles#index"
   
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
