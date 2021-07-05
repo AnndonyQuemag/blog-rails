@@ -1,8 +1,34 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <h1 class="navbar-brand" style="font-size: 40px;margin-left: 45%">Articles</h1>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+  <div class="container-fluid" style="margin-left: 15%">
+    <h1 class="navbar-brand" style="font-size: 35px" >Articles</h1>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarNav" style="margin-left:80%">
+      <ul class="navbar-nav" style="margin-left:-80%">
+        <li class="nav-item">
+          <% if current_user %>
+            <li>
+            <p style="color:black;"><%= current_user.email %></p></li>
+            <li>
+            <%= link_to logout_path do %>
+              <p class="nav-link" >Log out</p>
+            <% end %>
+            
+          <% else %>
+            <%= link_to signup_path do %>
+              <p class="nav-link" >Sign Up</p>
+              
+            <% end %> 
+            <%= link_to login_path do %>
+              <li>
+              <p class="nav-link" >Log In</p>
+              </li>
+            <% end %>
+          <% end %>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </nav>

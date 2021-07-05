@@ -2,11 +2,14 @@
   <li class="list-group-item">
   <h6>Comenter: <%= comment.commenter %></h6>
   comment: <%= comment.body %>
-  <%= link_to [comment.article, comment],
-                method: :delete,
-                data: { confirm: "Are you sure?" } do %>
-    <span class="btn btn-outline-light" style='font-size:20px;margin-left: 90%; margin-top: -40px '>&#10062;</span>
-    <% end %></li>
+  <% if current_user && current_user.id == comment.user_id %>
+    <%= link_to [comment.article, comment],
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } do %>
+        <span class="btn btn-outline-light" style='font-size:20px;margin-left: 90%; margin-top: -40px '>&#10062;</span>
+        <% end %></li>
+  <% end %>
+  
   <li class="list-group-item"></li>
 </ul>
   
