@@ -1,12 +1,15 @@
 class ArticlesController < ApplicationController
   #http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
 
-   def index
+  def index
     @articles = Article.all
+    @users = User.all
+    @follows = Follow.all
   end
 
   def show
     @article = Article.find(params[:id])
+    @follows = current_user.followings if current_user
   end
 
   def new
@@ -44,7 +47,6 @@ class ArticlesController < ApplicationController
 
     redirect_to root_path
   end
-
 
   private
   

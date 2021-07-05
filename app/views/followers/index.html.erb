@@ -1,0 +1,43 @@
+<%= render "./articles/nav" %>
+<br>
+<div class="container">
+  <div class="alert alert-primary" role="alert">  
+    <h4>My Follows</h4>
+  </div>
+  <% num = 0 %>
+  <div class="row">
+    <% @follows.each do |follow| %>
+      <% if follow.follower.id == current_user.id %>
+        <div class="card border-dark mb-3" style="max-width: 15rem; margin-right: 1rem; margin-top: 1rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= follow.followed_user.email %></h5>
+          </div>
+          <ul class="list-group list-group-flush">
+
+            <% @articles.each_with_index do |article, i| %>
+              <% if follow.followed_user.id == article.user_id %>
+                <% num += 1 %>
+              <% end %>
+            <% end %>
+            <li class="list-group-item">This user has <%= num %> articles </li>
+            <li class="list-group-item">
+              <%= link_to follower_path(follow.id),
+                method: :delete,
+                data: { confirm: "Are you sure?" } do %>
+                <button type="button" class="btn btn-info" >Unfollow</button>
+              <% end %>
+              
+            </li>
+          </ul>
+        </div>
+      <% end %>      
+    <% end %>
+  </div>
+
+  <div >
+    <%= link_to articles_path do %>
+      <button type="button" class="btn btn-danger">Back</button>
+    <% end %>
+    
+  </div>
+</div>
