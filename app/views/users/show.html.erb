@@ -7,8 +7,9 @@
       <%= link_to articles_path do %>
         <button type="button" class="btn btn-danger">Back</button>
       <% end %>
-
+      
       <% if current_user && current_user.id != @user.id %>
+        <% cont = 0 %>
         <% if @follows.size <= 0 %>
           <%= form_with url: followers_path, method: :post do |form| %>
             <%= form.hidden_field :follower_id, value: current_user.id %>
@@ -16,18 +17,20 @@
             <%= form.submit 'Follow', class: 'btn btn-warning' %>
           <% end %>
         <% end %>
-          <% @follows.each do |follow| %>
-            <% if @user.id != follow.id %>
-              <%= form_with url: followers_path, method: :post do |form| %>
-                <%= form.hidden_field :follower_id, value: current_user.id %>
-                <%= form.hidden_field :followed_user_id, value: @user.id %>
-                <%= form.submit 'Follow', class: 'btn btn-warning' %>
-              <% end %>
-            <% end %>
+        <% @follows.each do |follow| %>
+          <% if @user.id == follow.id %>
+            <% cont = 1 %>
           <% end %>
-
+        <% end %>
+        <% if cont < 1 %>
+          <%= form_with url: followers_path, method: :post do |form| %>
+            <%= form.hidden_field :follower_id, value: current_user.id %>
+            <%= form.hidden_field :followed_user_id, value: @user.id %>
+            <%= form.submit 'Follow', class: 'btn btn-warning' %>
+          <% end %>
+        <% end %>
       <% end %>
-      
+
     </div>
   </div>
   
