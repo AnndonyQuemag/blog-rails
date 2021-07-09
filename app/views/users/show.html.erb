@@ -1,9 +1,49 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<div class="container">
+  <h2>User: <%= @user.email %></h2>
+  <div style="margin-left: 90%;">
+    <div class="btn-group" role="group" aria-label="...">
+      <%= link_to articles_path do %>
+        <button type="button" class="btn btn-danger">Back</button>
+      <% end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+      <% if current_user && current_user.id != @user.id %>
+        <% if @follows.size <= 0 %>
+          <%= form_with url: followers_path, method: :post do |form| %>
+            <%= form.hidden_field :follower_id, value: current_user.id %>
+            <%= form.hidden_field :followed_user_id, value: @user.id %>
+            <%= form.submit 'Follow', class: 'btn btn-warning' %>
+          <% end %>
+        <% end %>
+          <% @follows.each do |follow| %>
+            <% if @user.id != follow.id %>
+              <%= form_with url: followers_path, method: :post do |form| %>
+                <%= form.hidden_field :follower_id, value: current_user.id %>
+                <%= form.hidden_field :followed_user_id, value: @user.id %>
+                <%= form.submit 'Follow', class: 'btn btn-warning' %>
+              <% end %>
+            <% end %>
+          <% end %>
+
+      <% end %>
+      
+    </div>
+  </div>
+  
+  <% @articles.each do |article| %>
+    <% if article.user_id == @user.id %>
+      <br>
+      <div class="card">
+        <div class="card-header">
+          
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to article.title, article %></h5>
+          <p class="card-text"><%= article.body[0..250] %>... <br></p>
+          
+        </div>
+      </div>
+    <% end %>
+  <% end %>   
+</div>

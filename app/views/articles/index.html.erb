@@ -8,29 +8,75 @@
     <h4>If you want to create articles, edit, or delete you must log in</h4>
   <% end %>
   <br><br>
-    <div class="row">
-      <% @articles.each do |article| %>
-        <div class="card border-dark mb-6" style="max-width: 40rem; margin-right: 1rem; margin-top: 1rem;">
-          <div class="card-header">Article</div>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to article.title, article %></h5>
-            <p class="card-text"><%= article.body[0..250] %>... <br></p>
-            <% if current_user && current_user.id == article.user_id %>
-              <%= link_to edit_article_path(article.id) do %>
-                <span class="btn btn-outline-light" style='font-size:30px;'>&#128221;</span>
-              <% end %> 
+  <% if current_user %>
+    <%= link_to followers_path do %>
+      <button type="button" class="btn btn-info" style="margin-left: 80%">Follows</button>
+    <% end %> 
+  <% end %>   
+  <button class="btn btn-outline-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" style="margin-left: 90%; margin-top: -5%">Bloggers</button>
+  <div class="row">
+    <% @articles.each do |article| %>
+      <div class="card border-dark mb-6" style="max-width: 40rem; margin-right: 1rem; margin-top: 1rem;">
+        <div class="card-header">Article</div>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to article.title, article %></h5>
+          <p class="card-text"><%= article.body[0..250] %>... <br></p>
+          <% if current_user && current_user.id == article.user_id %>
+            <%= link_to edit_article_path(article.id) do %>
+              <span class="btn btn-outline-light" style='font-size:30px;'>&#128221;</span>
+            <% end %> 
+          <% end %>
+          <% if current_user && current_user.id == article.user_id %>
+            <%= link_to article_path(article.id),
+              method: :delete,
+              data: { confirm: "Are you sure?" } do %>
+              <span class="btn btn-outline-light" style='font-size:30px;'>&#128465; </span>
             <% end %>
-            <% if current_user && current_user.id == article.user_id %>
-              <%= link_to article_path(article.id),
-                method: :delete,
-                data: { confirm: "Are you sure?" } do %>
-                <span class="btn btn-outline-light" style='font-size:30px;'>&#128465; </span>
-              <% end %>
-            <% end %>
-            </div>
+          <% end %>
           </div>
-      <% end %>
+        </div>
+    <% end %>
+  </div>
+  
+  
+
+
+    
+
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasRightLabel">List of Bloggers</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
+    <div class="offcanvas-body">
+      <% @users.each do |user| %>
+        <% if current_user && current_user.id == user.id %>
+          <div class="alert alert-primary" role="alert">
+            <h4>My Account</h4>
+            <%= user.email %>
+            <%= link_to user do %>
+              <span class="btn btn-outline-light" style='font-size:15px;'>&#128270;</span>
+            <% end %> 
+          </div>
+        <% end %>
+      <% end %>
+      <% @users.each do |user| %>
+        <% if current_user && current_user.id != user.id %>
+          <div class="alert alert-warning" role="alert">
+            <%= link_to user.email, user %>
+          </div>
+        <% end %>
+      <% end %>
+      <% @users.each do |user| %>
+        <% unless current_user %>
+          <div class="alert alert-warning" role="alert">
+            <%= link_to user.email, user %>
+          </div>
+        <% end %>
+      <% end %>
+      
+    </div>
+  </div>
 </div>
 
 
