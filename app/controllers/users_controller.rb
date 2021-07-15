@@ -11,8 +11,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @articles = Article.all
-    @follows = current_user.followings if current_user
-    
+    @follows = Follow.all
+    @followes = current_user.given_follows if current_user
   end
 
   # GET /users/new
