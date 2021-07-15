@@ -1,14 +1,15 @@
 <%= render "nav" %>
 <div class="container">
 <% if current_user %>
-  <% if @follows.size <= 0 && @article.user_id == current_user.id %> 
+  <% cont = 1 %>
+  <% if @article.user_id == current_user.id %> 
     <div style = "margin-left: 85%;padding: 1rem; max-width: 50rem;">
       <!-- Button trigger modal -->
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add comment</button>
     </div>
   <% else %>
     <% @follows.each do |follow| %>
-      <% if follow.id == @article.user_id || @article.user_id == current_user.id  %>
+      <% if follow.id == @article.user_id %>
         <div style = "margin-left: 85%;padding: 1rem; max-width: 50rem;">
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add comment</button>
